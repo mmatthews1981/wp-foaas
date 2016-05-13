@@ -1,13 +1,13 @@
 <?php
 
 /*
-Plugin Name: Wp Foaas
-Plugin URI: http://URI_Of_Page_Describing_Plugin_and_Updates
-Description: A brief description of the Plugin.
-Version: 1.0
-Author: Meredith
-Author URI: http://URI_Of_The_Plugin_Author
-License: A "Slug" license name e.g. GPL2
+Plugin Name: WP-FOAAS
+Plugin URI: https://github.com/mmatthews1981/wp-foaas
+Description: WP-FOAAS provides shortcode access to the Fuck Off As A Service API
+Version: 0.1
+Author: m.matthews
+Author URI: https://github.com/mmatthews1981
+License: GPL2
 */
 
 include( plugin_dir_path( __FILE__ ) . 'struct.php');
@@ -53,10 +53,6 @@ function foaas_func($atts){
     //return the quote
     return '<span class="message">'.urldecode($final['message']).'</span><span class="subtitle">'.urldecode($final['subtitle']).'</span>';
 }
-
-add_shortcode('foaas', 'foaas_func');
-
-add_action( 'admin_menu', 'foaas_func_custom_admin_menu' );
 
 function foaas_func_custom_admin_menu() {
     add_options_page(
@@ -126,3 +122,6 @@ function wp_foaas_options_page() {
     </div>
     <?php
 }
+
+add_shortcode('foaas', 'foaas_func');
+add_action( 'admin_menu', 'foaas_func_custom_admin_menu' );
