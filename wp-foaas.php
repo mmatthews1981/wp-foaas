@@ -3,14 +3,14 @@
 /*
 Plugin Name: WP-FOAAS
 Plugin URI: https://github.com/mmatthews1981/wp-foaas
-Description: WP-FOAAS provides shortcode access to the Fuck Off As A Service API
+Description: WP-FOAAS provides shortcode access to the F*ck Off As A Service API
 Version: 0.1
 Author: m.matthews
 Author URI: https://github.com/mmatthews1981
 License: GPL2
 */
 
-include( plugin_dir_path( __FILE__ ) . 'struct.php');
+include( plugin_dir_path( __FILE__ ) . 'wp-foaas-struct.php');
 
 function foaas_func($atts){
     //set the attrib defaults
@@ -24,20 +24,20 @@ function foaas_func($atts){
     }
 
     //callback, encode atts for the foaas api
-    function mapurlencodefunc($str){
+    function wp_foaas_mapurlencodefunc($str){
       return urlencode($str);
     };
 
     // make the $atts ready for transition
-    $newarr = array_map('mapurlencodefunc', $atts);
+    $newarr = array_map('wp_foaas_mapurlencodefunc', $atts);
     //build the api URL string
     $apiurl = 'http://foaas.com/'.implode('/', $newarr);
     // get the output
-    $final = getthejson($apiurl);
+    $final = wp_foaas_getthejson($apiurl);
 
     //if the output is a 622 error code, find the required shortcode atts and return an error code
     function requiredattributes($command){
-        $structure = getthejson('http://foaas.com/operations/');
+        $structure = wp_foaas_getthejson('http://foaas.com/operations/');
         $str = ucfirst(strtolower($command));
         foreach($structure as $thing){
             if($thing['name'] === $str || $thing['name'] === strtolower($str)) {
@@ -66,19 +66,19 @@ function foaas_func_custom_admin_menu() {
 
 function wp_foaas_options_page() {
 
-    $reference = getthejson('http://foaas.com/operations/');
+    $reference = wp_foaas_getthejson('http://foaas.com/operations/');
 
     ?>
     <div class="wrap">
-        <h2>WP Fuck Off As A Service</h2>
-        <p>FOAAS (Fuck Off As A Service) provides a modern, RESTful, scalable API solution to the common problem of telling people to fuck off, and now it's availabe to you via WordPress shortcodes!</p>
+        <h2>WP F*ck Off As A Service</h2>
+        <p>FOAAS (F*ck Off As A Service) provides a modern, RESTful, scalable API solution to the common problem of telling people to f*ck off, and now it's availabe to you via WordPress shortcodes!</p>
 
         <h3>Instructions</h3>
-        <p>To insert a dynamic fuckoff into your post or page is easy: just pick a fuckoff from the list below, and fill out the shortcode madlibs style. TIP: If you want to use more than one word in your fields, just put them in quotes.</p>
+        <p>To insert a dynamic f*ckoff into your post or page is easy: just pick a f*ckoff from the list below, and fill out the shortcode madlibs style. TIP: If you want to use more than one word in your fields, just put them in quotes.</p>
 
         <h3>Examples</h3>
         <blockquote>
-        <h4>fuckoff</h4>
+        <h4>f*ckoff</h4>
         <div>Fuck Off	/off/:name/:from</div>
         <h4>Shortcode</h4>
         <p>[foaas command=off name=Bob from=Bill]</p>
