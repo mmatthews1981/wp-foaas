@@ -1,5 +1,5 @@
 #WP-FOAAS
-This WordPress plugin provides access to [F*ck Off As A Service](https://github.com/tomdionysus/foaas) in your post and page content via shortcodes.
+This WordPress plugin provides access to [F\*ck Off As A Service](https://github.com/tomdionysus/foaas) in your post and page content via shortcodes.
 #Shortcode Examples
 [foaas command=off name=Bob from=Sue] returns: *F*ck off, Bob.- Sue*
 
